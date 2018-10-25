@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 19-Out-2018 às 13:38
+-- Generation Time: 25-Out-2018 às 21:05
 -- Versão do servidor: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -35,7 +35,7 @@ CREATE TABLE `aluguel` (
   `hora_aluguel` varchar(10) NOT NULL,
   `data_aluguel` varchar(10) NOT NULL,
   `data_devolucao` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -46,7 +46,7 @@ CREATE TABLE `aluguel` (
 CREATE TABLE `categoria` (
   `idcategoria` int(11) NOT NULL,
   `nome` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,7 @@ CREATE TABLE `classificacao` (
   `idclassificacao` int(11) NOT NULL,
   `nome` varchar(20) NOT NULL,
   `preco` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ CREATE TABLE `cliente` (
   `rua` varchar(45) NOT NULL,
   `numero` int(11) NOT NULL,
   `cep` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -90,8 +90,9 @@ CREATE TABLE `dvd` (
   `iddvd` int(11) NOT NULL,
   `idfilme` int(11) NOT NULL,
   `preco_compra` double DEFAULT NULL,
+  `data_compra` varchar(10) DEFAULT NULL,
   `situacao` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,7 @@ CREATE TABLE `filme` (
   `idcategoria` int(11) NOT NULL,
   `idclassificacao` int(11) NOT NULL,
   `capa` varchar(80) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -120,14 +121,14 @@ CREATE TABLE `funcionario` (
   `nome` varchar(100) NOT NULL,
   `login` varchar(45) NOT NULL,
   `senha` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Extraindo dados da tabela `funcionario`
 --
 
 INSERT INTO `funcionario` (`idfuncionario`, `nome`, `login`, `senha`) VALUES
-(1, 'Adiministrador', 'qwe', '123');
+(1, 'Administrador', 'qwe', '123');
 
 --
 -- Indexes for dumped tables
