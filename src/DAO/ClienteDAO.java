@@ -49,7 +49,7 @@ public class ClienteDAO extends ExecuteSQL {
         }
     }
     
-    public List<Cliente> ListarCliente() throws SQLException{
+    public List<Cliente> ListarCliente(){
         String sql = "select idcliente,nome,rg,cpf,telefone,email from cliente";
         List<Cliente> lista = new ArrayList<>();
         try{
@@ -160,7 +160,7 @@ public class ClienteDAO extends ExecuteSQL {
             return Resultado;
         }
         
-        public List<Cliente> CapturarCliente(int cod) throws SQLException{
+        public List<Cliente> CapturarCliente(int cod){
             String sql = "select * from cliente where idcliente =" + cod +" ";
             List<Cliente> lista = new ArrayList<>();
             try{
@@ -191,7 +191,7 @@ public class ClienteDAO extends ExecuteSQL {
             }
         }
         
-        public String Alterar_Cliente(Cliente a) throws SQLException{
+        public String Alterar_Cliente(Cliente a){
             String sql = "update cliente set nome = ? ,data_nasc = ?,rg = ?"
                     + ",cpf = ?,email = ?,telefone = ?,bairro = ?,rua = ?,"
                     + ",numero = ?,cep = ? where idcliente";
@@ -217,5 +217,72 @@ public class ClienteDAO extends ExecuteSQL {
                 return e.getMessage();
             }
         }
+        
+        public List<Cliente> ListarComboCliente() {
+            
+            String sql = "Select nome from cliente order by nome ";
+            List<Cliente> lista = new ArrayList<>();
+            try {
+                PreparedStatement ps = getCon().prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs != null) {
+                    while (rs.next()) {
+                        Cliente a = new Cliente();
+                        a.setNome(rs.getString(1));
+                        lista.add(a);
+                    }
+                    return lista;
+                }else{
+                 return null;
+                }
+                
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        
+        public List<Cliente> ConsultarCodigoCliente(String nome) {
+            String sql = "select idcliente from cliente where nome = '" + nome + "'";
+            List<Cliente> lista = new ArrayList<>();
+            try {
+                PreparedStatement ps = getCon().prepareStatement(sql);
+                ResultSet rs = ps.executeQuery();
+                
+                if (rs != null){
+                    while (rs.next()) {
+                        Cliente a = new Cliente();
+                        a.setCodigo(rs.getInt(1));
+                        lista.add(a);
+                        
+                    }
+                    return lista;
+                }else{
+                    return null;
+                }
+            } catch (Exception e) {
+                return null;
+            }
+        }
+        
+        public String Excluir_Cliente(Cliente a){
+            String sql = "delete from cliente where idcliente =? and nome = ?";
+            
+            try {
+                PreparedStatement ps = getCon().prepareStatement(sql);
+                ps.setInt(1, a.getCodigo());
+                ps.setString(2, a.getNome());
+                if(ps.executeUpdate()>0){
+                    return "Excluido com sucesso.";
+                }else{
+                    return "Erro ao excluir";
+            }
+            } catch (Exception e) {
+                return e.getMessage();
+            }
+            }
+        
 }
+
+
 
