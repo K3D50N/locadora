@@ -89,13 +89,7 @@ public class CadastrarFilme extends javax.swing.JFrame {
 
         jLabel8.setText("Duração :");
 
-        jTextField7.setText("000:00");
-
         jButton4.setText("OK");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Aluno\\Documents\\NetBeansProjects\\Projeto_locadora\\src\\Imagens\\DVD_VIDEO_logo.png")); // NOI18N
 
