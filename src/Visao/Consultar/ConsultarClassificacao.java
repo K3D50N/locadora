@@ -6,9 +6,9 @@
 
 package Visao.Consultar;
 
-import DAO.ClienteDAO;
+import DAO.ClassificacaoDAO;
 import DAO.Conexao;
-import Modelo.Cliente;
+import Modelo.Classificacao;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ConsultarClassificacao extends javax.swing.JFrame {
 
-    /** Creates new form ConsultarCliente */
+    /** Creates new form ConsultarClassificacao */
     public ConsultarClassificacao() throws SQLException {
         initComponents();
         
@@ -95,7 +95,7 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código", "Cliente", "RG", "CPF", "Telefone", "Email"
+                "Código", "Nome", "Preço"
             }
         ));
         jScrollPane1.setViewportView(jTable);
@@ -224,9 +224,9 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
     private void AtualizaTable(){
        
         Connection Con = Conexao.AbrirConexao();
-        ClienteDAO bd = new ClienteDAO(Con);
-        List<Cliente> lista = new ArrayList<>();
-        lista = bd.ListarCliente();
+        ClassificacaoDAO bd = new ClassificacaoDAO(Con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = bd.ListarClassificacao();
         DefaultTableModel tbm =
                 (DefaultTableModel) jTable.getModel();
         while (tbm.getRowCount() >0) {
@@ -234,14 +234,11 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
             
         }
         int i = 0;
-        for (Cliente tab : lista){
+        for (Classificacao tab : lista){
             tbm.addRow(new String[1]);
             jTable.setValueAt(tab.getCodigo(), i, 0);
             jTable.setValueAt(tab.getNome(), i, 1);
-            jTable.setValueAt(tab.getRG(), i, 2);
-            jTable.setValueAt(tab.getCPF(), i, 3);
-            jTable.setValueAt(tab.getTelefone(), i, 4);
-            jTable.setValueAt(tab.getEmail(), i, 5);
+            jTable.setValueAt(tab.getPreco(), i, 2);
             i++;
         }
         Conexao.FecharConexao(Con);
@@ -249,9 +246,9 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
 
     private void BuscarNome() {
         Connection Con = Conexao.AbrirConexao();
-        ClienteDAO bd = new ClienteDAO(Con);
-        List<Cliente> lista = new ArrayList<>();
-        lista = bd.Pesquisar_Nome_Cliente(jTextField1.getText());
+        ClassificacaoDAO bd = new ClassificacaoDAO(Con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = bd.Pesquisar_Nome_Classificacao(jTextField1.getText());
         DefaultTableModel tbm =
                 (DefaultTableModel) jTable.getModel();
         while (tbm.getRowCount() >0) {
@@ -259,14 +256,11 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
             
         }
         int i = 0;
-        for (Cliente tab : lista){
+        for (Classificacao tab : lista){
             tbm.addRow(new String[1]);
             jTable.setValueAt(tab.getCodigo(), i, 0);
             jTable.setValueAt(tab.getNome(), i, 1);
-            jTable.setValueAt(tab.getRG(), i, 2);
-            jTable.setValueAt(tab.getCPF(), i, 3);
-            jTable.setValueAt(tab.getTelefone(), i, 4);
-            jTable.setValueAt(tab.getEmail(), i, 5);
+            jTable.setValueAt(tab.getPreco(), i, 2);
             i++;
         }
         Conexao.FecharConexao(Con);
@@ -274,9 +268,9 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
 
     private void BuscarCod() {
         Connection Con = Conexao.AbrirConexao();
-        ClienteDAO bd = new ClienteDAO(Con);
-        List<Cliente> lista = new ArrayList<>();
-        lista = bd.Pesquisar_Cod_Cliente(jTextField2.getText(""));
+        ClassificacaoDAO bd = new ClassificacaoDAO(Con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = bd.Pesquisar_Cod_Classificacao(jTextField2.getText(""));
         DefaultTableModel tbm =
                 (DefaultTableModel) jTable.getModel();
         while (tbm.getRowCount() >0) {
@@ -284,14 +278,11 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
             
         }
         int i = 0;
-        for (Cliente tab : lista){
+        for (Classificacao tab : lista){
             tbm.addRow(new String[1]);
             jTable.setValueAt(tab.getCodigo(), i, 0);
             jTable.setValueAt(tab.getNome(), i, 1);
-            jTable.setValueAt(tab.getRG(), i, 2);
-            jTable.setValueAt(tab.getCPF(), i, 3);
-            jTable.setValueAt(tab.getTelefone(), i, 4);
-            jTable.setValueAt(tab.getEmail(), i, 5);
+            jTable.setValueAt(tab.getPreco(), i, 2);
             i++;
         }
         Conexao.FecharConexao(Con);
