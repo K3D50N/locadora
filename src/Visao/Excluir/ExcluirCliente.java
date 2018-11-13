@@ -22,22 +22,25 @@ public class ExcluirCliente extends javax.swing.JFrame {
     /**
      * Creates new form ExcluirCliente
      */
-    public ExcluirCliente() {
-        initComponents();
-    }
-    
-    private void AtualizarCombo(){
+   private void AtualizaCombo() {
         Connection con = Conexao.AbrirConexao();
         ClienteDAO sql = new ClienteDAO(con);
         List<Cliente> lista = new ArrayList<>();
-        lista = sql.ListarCliente();
+        lista = sql.ListarComboCliente();
         jCB_Nome.addItem("");
         
-        for (Cliente b : lista){
-        
+        for (Cliente b : lista) {
             jCB_Nome.addItem(b.getNome());
         }
+        
         Conexao.FecharConexao(con);
+    }
+
+    public ExcluirCliente() {
+        initComponents();
+        setLocationRelativeTo(this);
+        AtualizaCombo();
+        
     }
 
     /**
@@ -151,6 +154,7 @@ public class ExcluirCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
@@ -161,13 +165,14 @@ public class ExcluirCliente extends javax.swing.JFrame {
         Connection con = Conexao.AbrirConexao();
         ClienteDAO sql = new ClienteDAO(con);
         Cliente a = new Cliente();
-        if (nome.equals("")){
+        
+        if (nome.equals("")) {
             JOptionPane.showMessageDialog(null, "Nenhum nome selecionado",
-                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
-        }else{
+                    "Vídeo Locadora", JOptionPane.WARNING_MESSAGE);
+        } else {
             int b = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir"
-            + "\n (" + codigo +") (" + nome + ")", "Video Locadora",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    + "\n ( " + codigo + " ) ( " + nome + " ) ", "Vídeo Locadora",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             
             if (b == 0) {
                 int cod = Integer.parseInt(codigo);
@@ -183,17 +188,18 @@ public class ExcluirCliente extends javax.swing.JFrame {
 
     private void jCB_NomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_NomeActionPerformed
         // TODO add your handling code here:
-        Connection con = Conexao.AbrirConexao();
+      Connection con = Conexao.AbrirConexao();
         ClienteDAO sql = new ClienteDAO(con);
         List<Cliente> lista = new ArrayList<>();
         String nome = jCB_Nome.getSelectedItem().toString();
         
         lista = sql.ConsultarCodigoCliente(nome);
         
-        for (Cliente b : lista){
+        for (Cliente b : lista) {
             int a = b.getCodigo();
             jTF_Codigo.setText("" + a);
         }
+        
         Conexao.FecharConexao(con);
     }//GEN-LAST:event_jCB_NomeActionPerformed
 

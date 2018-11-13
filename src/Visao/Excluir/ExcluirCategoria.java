@@ -24,6 +24,21 @@ public class ExcluirCategoria extends javax.swing.JFrame {
      */
     public ExcluirCategoria() {
         initComponents();
+        setLocationRelativeTo(this);
+        AtualizaCombo();
+    }
+    private void AtualizaCombo() {
+        Connection con = Conexao.AbrirConexao();
+        CategoriaDAO sql = new CategoriaDAO(con);
+        List<Categoria> lista = new ArrayList<>();
+        lista = sql.ListarComboCategoria();
+        jCB_Nome.addItem("");
+        
+        for (Categoria b : lista) {
+            jCB_Nome.addItem(b.getNome());
+        }
+        
+        Conexao.FecharConexao(con);
     }
 
     /**
@@ -134,20 +149,20 @@ public class ExcluirCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
-        // TODO add your handling code here:
-                String codigo = jTF_Codigo.getText();
+         String codigo = jTF_Codigo.getText();
         String nome = jCB_Nome.getSelectedItem().toString();
         
         Connection con = Conexao.AbrirConexao();
         CategoriaDAO sql = new CategoriaDAO(con);
         Categoria a = new Categoria();
-        if (nome.equals("")){
+        
+        if (nome.equals("")) {
             JOptionPane.showMessageDialog(null, "Nenhum nome selecionado",
-                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
-        }else{
+                    "Vídeo Locadora", JOptionPane.WARNING_MESSAGE);
+        } else {
             int b = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir"
-            + "\n (" + codigo +") (" + nome + ")", "Video Locadora",
-            JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                    + "\n ( " + codigo + " ) ( " + nome + " ) ", "Vídeo Locadora",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             
             if (b == 0) {
                 int cod = Integer.parseInt(codigo);
@@ -162,17 +177,18 @@ public class ExcluirCategoria extends javax.swing.JFrame {
 
     private void jCB_NomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCB_NomeActionPerformed
         // TODO add your handling code here:
-         Connection con = Conexao.AbrirConexao();
+        Connection con = Conexao.AbrirConexao();
         CategoriaDAO sql = new CategoriaDAO(con);
         List<Categoria> lista = new ArrayList<>();
         String nome = jCB_Nome.getSelectedItem().toString();
         
         lista = sql.ConsultarCodigoCategoria(nome);
         
-        for (Categoria b : lista){
+        for (Categoria b : lista) {
             int a = b.getCodigo();
             jTF_Codigo.setText("" + a);
         }
+        
         Conexao.FecharConexao(con);
     }//GEN-LAST:event_jCB_NomeActionPerformed
 

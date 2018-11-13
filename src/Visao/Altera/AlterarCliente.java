@@ -24,8 +24,32 @@ public class AlterarCliente extends javax.swing.JFrame {
      */
     public AlterarCliente() {
         initComponents();
-        
+        setLocationRelativeTo(this);
     }
+    
+    private void InserirDados(int cod) {
+        Connection con = Conexao.AbrirConexao();
+        ClienteDAO sql = new ClienteDAO(con);
+        List<Cliente> lista = new ArrayList<>();
+        lista = sql.CapturarCliente(cod);
+        
+        for (Cliente a : lista) {
+           jTF_Codigo.setText("" + a.getCodigo());
+            jTF_Nome.setText(a.getNome());
+            jTF_CEP.setText(a.getCEP());
+            jTF_Numero.setText("" + a.getNumero());
+            jTF_Bairro.setText(a.getBairro());
+            jTF_Email.setText(a.getEmail());
+            jTF_Telefone.setText(a.getTelefone());
+            jTF_Rua.setText(a.getRua());
+            jTF_Nascimento.setText(a.getNascimento());
+            jTF_RG.setText(a.getRG());
+            jTF_CPF.setText(a.getCPF());
+        }
+        
+        Conexao.FecharConexao(con);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -157,6 +181,11 @@ public class AlterarCliente extends javax.swing.JFrame {
         });
 
         jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -430,18 +459,20 @@ public class AlterarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jTF_TelefoneActionPerformed
 
     private void btOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOKActionPerformed
-        // TODO add your handling code here:
-        String codigo = jTF_Cod.getText();
+        String c = jTF_Cod.getText();
+        
         Connection con = Conexao.AbrirConexao();
         ClienteDAO sql = new ClienteDAO(con);
-        int cod = Integer.parseInt(codigo);
-        if (sql.Testar_Cliente(cod) == false){
-            JOptionPane.showMessageDialog(null, "Codigo não Encontrado no Banco",
-                    "Video Locadora", JOptionPane.ERROR_MESSAGE);
+        
+        int cod = Integer.parseInt(c);
+        if (sql.Testar_Cliente(cod) == false) {
+            JOptionPane.showMessageDialog(null, "Código não encontrado no Banco",
+                    "Vídeo Locadora", JOptionPane.ERROR_MESSAGE);
         }
-        if (codigo.equals("")){
-            JOptionPane.showMessageDialog(null, "Digite um codigo para atualizar",
-                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
+        
+        if (c.equals("")) {
+            JOptionPane.showMessageDialog(null, "Digite um Código para Atualizar",
+                    "Vídeo Locadora", JOptionPane.WARNING_MESSAGE);
         }
         jTF_Codigo.setText("");
         jTF_Nome.setText("");
@@ -509,10 +540,10 @@ public class AlterarCliente extends javax.swing.JFrame {
         String fone = jTF_Telefone.getText();
         String cpf = jTF_CPF.getText();
         String rg = jTF_RG.getText();
-        if (nome.equals("")){
-            JOptionPane.showMessageDialog(null, "nenhum campo pode estar vazio",
-                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
-        } else{
+        if (nome.equals("")) {
+            JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio",
+                    "Vídeo Locadora", JOptionPane.WARNING_MESSAGE);
+        } else {
             Connection con = Conexao.AbrirConexao();
             ClienteDAO sql = new ClienteDAO(con);
             int num = Integer.parseInt(numero);
@@ -544,11 +575,17 @@ public class AlterarCliente extends javax.swing.JFrame {
             jTF_Nascimento.setText("");
             jTF_RG.setText("");
             jTF_CPF.setText("");
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso",
-                    "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
+            
+            JOptionPane.showMessageDialog(null, "Informações atualizadas",
+                    "Vídeo Locadora", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
     }//GEN-LAST:event_btalterarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -628,27 +665,27 @@ public class AlterarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 
-    private void InserirDados(int cod){
-        Connection con = Conexao.AbrirConexao();
-        ClienteDAO sql = new ClienteDAO(con);
-        List<Cliente> lista = new ArrayList<>();
-        lista = sql.CapturarCliente(cod);
+   // private void InserirDados(int cod){
+       // Connection con = Conexao.AbrirConexao();
+        //ClienteDAO sql = new ClienteDAO(con);
+        //List<Cliente> lista = new ArrayList<>();
+     //   lista = sql.CapturarCliente(cod);
         
-        for (Cliente a : lista){
+       // for (Cliente a : lista){
         
-            jTF_Codigo.setText("" + a.getCodigo());
-            jTF_Nome.setText(a.getNome());
-            jTF_CEP.setText(a.getCEP());
-            jTF_Numero.setText("" + a.getNumero());
-            jTF_Bairro.setText(a.getBairro());
-            jTF_Email.setText(a.getEmail());
-            jTF_Telefone.setText(a.getTelefone());
-            jTF_Rua.setText(a.getRua());
-            jTF_Nascimento.setText(a.getNascimento());
-            jTF_RG.setText(a.getRG());
-            jTF_CPF.setText(a.getCPF());
+         //   jTF_Codigo.setText("" + a.getCodigo());
+           // jTF_Nome.setText(a.getNome());
+            //jTF_CEP.setText(a.getCEP());
+            //jTF_Numero.setText("" + a.getNumero());
+            //jTF_Bairro.setText(a.getBairro());
+            //jTF_Email.setText(a.getEmail());
+            //jTF_Telefone.setText(a.getTelefone());
+            //jTF_Rua.setText(a.getRua());
+            //jTF_Nascimento.setText(a.getNascimento());
+            //jTF_RG.setText(a.getRG());
+            //jTF_CPF.setText(a.getCPF());
         }
         
-        Conexao.FecharConexao(con);
-    }
-}
+        //Conexao.FecharConexao(con);
+    //}
+//}

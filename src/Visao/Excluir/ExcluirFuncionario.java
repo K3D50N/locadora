@@ -24,6 +24,21 @@ public class ExcluirFuncionario extends javax.swing.JFrame {
      */
     public ExcluirFuncionario() {
         initComponents();
+        setLocationRelativeTo(this);
+        AtualizaCombo();
+    }
+    private void AtualizaCombo() {
+        Connection con = Conexao.AbrirConexao();
+        FuncionarioDAO sql = new FuncionarioDAO(con);
+        List<Funcionario> lista = new ArrayList<>();
+        lista = sql.ListarComboFuncionario();
+        jCB_Nome.addItem("");
+        
+        for (Funcionario b : lista) {
+            jCB_Nome.addItem(b.getNome());
+        }
+        
+        Conexao.FecharConexao(con);
     }
 
     /**
@@ -152,7 +167,7 @@ public class ExcluirFuncionario extends javax.swing.JFrame {
             if (b == 0) {
                 int cod = Integer.parseInt(codigo);
                 a.setNome(nome);
-                a.setCodigo(cod);
+                a.setCod(cod);
                 sql.Excluir_Funcionario(a);
                 Conexao.FecharConexao(con);
                 dispose();
@@ -171,7 +186,7 @@ public class ExcluirFuncionario extends javax.swing.JFrame {
         lista = sql.ConsultarCodigoFuncionario(nome);
         
         for (Funcionario b : lista){
-            int a = b.getCodigo();
+            int a = b.getCod();
             jTF_Codigo.setText("" + a);
         }
         Conexao.FecharConexao(con);

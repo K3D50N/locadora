@@ -160,26 +160,29 @@ public class CadastrarClassificacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
-        // TODO add your handling code here:
-         String nome = jTF_Nome.getText();
-        if (nome.equals("")){
-            JOptionPane.showMessageDialog(null, "nenhum campo pode estar vazio",
-                    "Video Locadora", JOptionPane.WARNING_MESSAGE);
-        }else{
+        String nome = jTF_Nome.getText();
+        String preco = jTF_Preco.getText();
+        
+        if (nome.equals("")) {
+            
+            JOptionPane.showMessageDialog(null, "Nenhum campo está vazio", 
+                    "Vídeo Locadora", JOptionPane.WARNING_MESSAGE);
+        } else {
             Connection con = Conexao.AbrirConexao();
             ClassificacaoDAO sql = new ClassificacaoDAO(con);
             Classificacao a = new Classificacao();
             
             a.setNome(nome);
+            a.setPreco(Double.parseDouble(preco));
             
             sql.Inserir_Classificacao(a);
             Conexao.FecharConexao(con);
             
             jTF_Nome.setText("");
             jTF_Preco.setText("");
-            jTF_Codigo.setText("");
-            JOptionPane.showMessageDialog(null, "Cadastro Realizado com sucesso",
-                    "Video Locadora", JOptionPane.INFORMATION_MESSAGE);
+            
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso",
+                    "Vídeo Locadora", JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
     }//GEN-LAST:event_btSalvarActionPerformed
