@@ -27,6 +27,23 @@ public class AlterarClassificacao extends javax.swing.JFrame {
     public AlterarClassificacao() {
         initComponents();
     }
+    private void InserirDados(int cod) {
+        Connection con = Conexao.AbrirConexao();
+        ClassificacaoDAO sql = new ClassificacaoDAO(con);
+        List<Classificacao> lista = new ArrayList<>();
+        lista = sql.CapturarClassificacao(cod);
+        
+        for (Classificacao a : lista) {
+           
+            
+            jTF_Codigo.setText("" + a.getCodigo());
+            jTF_Nome.setText(a.getNome());
+            jTF_Preco.setText(""+a.getPreco());
+       
+        }
+        
+        Conexao.FecharConexao(con);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -122,6 +139,11 @@ public class AlterarClassificacao extends javax.swing.JFrame {
         });
 
         jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -132,9 +154,9 @@ public class AlterarClassificacao extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(104, 104, 104)
                 .addComponent(btAlterar)
-                .addGap(106, 106, 106)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(45, 45, 45))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,8 +296,7 @@ public class AlterarClassificacao extends javax.swing.JFrame {
     }//GEN-LAST:event_btOKActionPerformed
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        // TODO add your handling code here:
-        String codigo = jTF_Codigo.getText();
+       String codigo = jTF_Codigo.getText();
         String nome = jTF_Nome.getText();
          String preco = jTF_Preco.getText();
 
@@ -307,6 +328,11 @@ public class AlterarClassificacao extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btAlterarActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -364,20 +390,20 @@ public class AlterarClassificacao extends javax.swing.JFrame {
     private javax.swing.JTextField jTF_Preco;
     // End of variables declaration//GEN-END:variables
 
-    private void InserirDados(int cod) {
-         Connection con = Conexao.AbrirConexao();
-        ClassificacaoDAO sql = new ClassificacaoDAO(con);
-        List<Classificacao> lista = new ArrayList<>();
-        lista = sql.CapturarClassificacao(cod);
+    //private void InserirDados(int cod) {
+      //   Connection con = Conexao.AbrirConexao();
+       // ClassificacaoDAO sql = new ClassificacaoDAO(con);
+        //List<Classificacao> lista = new ArrayList<>();
+        //lista = sql.CapturarClassificacao(cod);
         
-        for (Classificacao a : lista){
+       // for (Classificacao a : lista){
         
-            jTF_Codigo.setText("" + a.getCodigo());
-            jTF_Nome.setText(a.getNome());
-            jTF_Preco.setText(""+a.getPreco());
-        }
+         //   jTF_Codigo.setText("" + a.getCodigo());
+           // jTF_Nome.setText(a.getNome());
+            //jTF_Preco.setText(""+a.getPreco());
+        //}
         
-        Conexao.FecharConexao(con);
-    }
+        //Conexao.FecharConexao(con);
+    //}
     
 }

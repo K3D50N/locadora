@@ -22,7 +22,7 @@ public class AlterarCliente extends javax.swing.JFrame {
     /**
      * Creates new form AlterarFuncionario
      */
-    public AlterarCliente() {
+   public AlterarCliente() {
         initComponents();
         setLocationRelativeTo(this);
     }
@@ -34,15 +34,15 @@ public class AlterarCliente extends javax.swing.JFrame {
         lista = sql.CapturarCliente(cod);
         
         for (Cliente a : lista) {
-           jTF_Codigo.setText("" + a.getCodigo());
+            jTF_Codigo.setText("" + a.getCodigo());
             jTF_Nome.setText(a.getNome());
-            jTF_CEP.setText(a.getCEP());
+            jTF_Nascimento.setText("" + a.getNascimento());
             jTF_Numero.setText("" + a.getNumero());
+            jTF_CEP.setText(a.getCEP());
             jTF_Bairro.setText(a.getBairro());
             jTF_Email.setText(a.getEmail());
-            jTF_Telefone.setText(a.getTelefone());
+            jTF_Telefone.setText("" + a.getTelefone());
             jTF_Rua.setText(a.getRua());
-            jTF_Nascimento.setText(a.getNascimento());
             jTF_RG.setText(a.getRG());
             jTF_CPF.setText(a.getCPF());
         }
@@ -532,14 +532,15 @@ public class AlterarCliente extends javax.swing.JFrame {
         String codigo = jTF_Codigo.getText();
         String nome = jTF_Nome.getText();
         String nascimento = jTF_Nascimento.getText();
-        String cep = jTF_CEP.getText();
-        String rua = jTF_Rua.getText();
         String numero = jTF_Numero.getText();
+        String cep = jTF_CEP.getText();
         String bairro = jTF_Bairro.getText();
         String email = jTF_Email.getText();
-        String fone = jTF_Telefone.getText();
-        String cpf = jTF_CPF.getText();
+        String telefone = jTF_Telefone.getText();
+        String rua = jTF_Rua.getText();
         String rg = jTF_RG.getText();
+        String cpf = jTF_CPF.getText();
+        
         if (nome.equals("")) {
             JOptionPane.showMessageDialog(null, "Nenhum campo pode estar vazio",
                     "Vídeo Locadora", JOptionPane.WARNING_MESSAGE);
@@ -560,25 +561,25 @@ public class AlterarCliente extends javax.swing.JFrame {
             a.setCEP(cep);
             a.setRua(rua);
             a.setEmail(email);
-            a.setTelefone(fone);
+            a.setTelefone(telefone);
             
             sql.Alterar_Cliente(a);
             Conexao.FecharConexao(con);
             
             jTF_Nome.setText("");
-            jTF_CEP.setText("");
+            jTF_Nascimento.setText("");
             jTF_Numero.setText("");
+            jTF_CEP.setText("");
             jTF_Bairro.setText("");
             jTF_Email.setText("");
             jTF_Telefone.setText("");
             jTF_Rua.setText("");
-            jTF_Nascimento.setText("");
             jTF_RG.setText("");
             jTF_CPF.setText("");
             
             JOptionPane.showMessageDialog(null, "Informações atualizadas",
                     "Vídeo Locadora", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
+       
         }
     }//GEN-LAST:event_btalterarActionPerformed
 
