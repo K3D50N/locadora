@@ -465,7 +465,7 @@ public class AlterarCliente extends javax.swing.JFrame {
         ClienteDAO sql = new ClienteDAO(con);
         
         int cod = Integer.parseInt(c);
-        if (sql.Testar_Cliente(cod) == false) {
+        if (sql.testar_Cliente(cod) == false) {
             JOptionPane.showMessageDialog(null, "Código não encontrado no Banco",
                     "Vídeo Locadora", JOptionPane.ERROR_MESSAGE);
         }
