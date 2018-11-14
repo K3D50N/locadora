@@ -222,12 +222,12 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        BuscarNome();
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        BuscarCod();
+  
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -284,48 +284,5 @@ public class ConsultarClassificacao extends javax.swing.JFrame {
     private javax.swing.JTable tabClass;
     // End of variables declaration//GEN-END:variables
 
-    private void BuscarNome() {
-        Connection Con = Conexao.AbrirConexao();
-        ClassificacaoDAO bd = new ClassificacaoDAO(Con);
-        List<Classificacao> lista = new ArrayList<>();
-        lista = bd.Pesquisar_Nome_Classificacao(jTF_Nome.getText());
-        DefaultTableModel tbm =
-                (DefaultTableModel) tabClass.getModel();
-        while (tbm.getRowCount() >0) {
-            tbm.removeRow(0);
-            
-        }
-        int i = 0;
-        for (Classificacao tab : lista){
-            tbm.addRow(new String[1]);
-            tabClass.setValueAt(tab.getCodigo(), i, 0);
-            tabClass.setValueAt(tab.getNome(), i, 1);
-            tabClass.setValueAt(tab.getPreco(), i, 2);
-            i++;
-        }
-        Conexao.FecharConexao(Con);
-    }
-
-    private void BuscarCod() {
-        Connection Con = Conexao.AbrirConexao();
-        ClassificacaoDAO bd = new ClassificacaoDAO(Con);
-        List<Classificacao> lista = new ArrayList<>();
-        lista = bd.Pesquisar_Cod_Classificacao(jTF_Codigo.getText(""));
-        DefaultTableModel tbm =
-                (DefaultTableModel) tabClass.getModel();
-        while (tbm.getRowCount() >0) {
-            tbm.removeRow(0);
-            
-        }
-        int i = 0;
-        for (Classificacao tab : lista){
-            tbm.addRow(new String[1]);
-            tabClass.setValueAt(tab.getCodigo(), i, 0);
-            tabClass.setValueAt(tab.getNome(), i, 1);
-            tabClass.setValueAt(tab.getPreco(), i, 2);
-            i++;
-        }
-        Conexao.FecharConexao(Con);
-    }
 
 }

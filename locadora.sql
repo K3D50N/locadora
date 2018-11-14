@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 25-Out-2018 às 21:05
+-- Generation Time: 14-Nov-2018 às 19:18
 -- Versão do servidor: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -48,6 +48,14 @@ CREATE TABLE `categoria` (
   `nome` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `categoria`
+--
+
+INSERT INTO `categoria` (`idcategoria`, `nome`) VALUES
+(2, 'Comedia'),
+(3, 'Aventura');
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +67,14 @@ CREATE TABLE `classificacao` (
   `nome` varchar(20) NOT NULL,
   `preco` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `classificacao`
+--
+
+INSERT INTO `classificacao` (`idclassificacao`, `nome`, `preco`) VALUES
+(2, '+18', 50),
+(3, '+16', 45);
 
 -- --------------------------------------------------------
 
@@ -79,6 +95,14 @@ CREATE TABLE `cliente` (
   `numero` int(11) NOT NULL,
   `cep` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `cliente`
+--
+
+INSERT INTO `cliente` (`idcliente`, `nome`, `data_nasc`, `rg`, `cpf`, `email`, `telefone`, `bairro`, `rua`, `numero`, `cep`) VALUES
+(1, 'Francisco Kedson', '08/01/2002', '5555555', '66666', 'Franciscokedson321@hotmail.com', '84994521918', 'sdfghjk', 'Joaquim Rocjael', 123456, '3456789'),
+(2, 'Levi Vinicius', '88888', '333333', '777777777', 'asdfghj', '123456', 'asdfghj', 'jhgfdsa', 222222, '9876');
 
 -- --------------------------------------------------------
 
@@ -128,7 +152,8 @@ CREATE TABLE `funcionario` (
 --
 
 INSERT INTO `funcionario` (`idfuncionario`, `nome`, `login`, `senha`) VALUES
-(1, 'Administrador', 'qwe', '123');
+(1, 'Administrador', 'admin', 'admin'),
+(2, 'Usúario', 'Kedson', 'zerei');
 
 --
 -- Indexes for dumped tables
@@ -195,19 +220,19 @@ ALTER TABLE `aluguel`
 -- AUTO_INCREMENT for table `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `classificacao`
 --
 ALTER TABLE `classificacao`
-  MODIFY `idclassificacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idclassificacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idcliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `dvd`
@@ -225,7 +250,7 @@ ALTER TABLE `filme`
 -- AUTO_INCREMENT for table `funcionario`
 --
 ALTER TABLE `funcionario`
-  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idfuncionario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

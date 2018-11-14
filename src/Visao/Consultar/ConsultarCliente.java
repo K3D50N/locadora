@@ -174,12 +174,12 @@ public class ConsultarCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        BuscarNome();
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        BuscarCod();
+    
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -265,54 +265,6 @@ public class ConsultarCliente extends javax.swing.JFrame {
         Conexao.FecharConexao(Con);
     }
 
-    private void BuscarNome() {
-        Connection Con = Conexao.AbrirConexao();
-        ClienteDAO bd = new ClienteDAO(Con);
-        List<Cliente> lista = new ArrayList<>();
-        lista = bd.Pesquisar_Nome_Cliente(nome.getText());
-        DefaultTableModel tbm =
-                (DefaultTableModel) jTable.getModel();
-        while (tbm.getRowCount() >0) {
-            tbm.removeRow(0);
-            
-        }
-        int i = 0;
-        for (Cliente tab : lista){
-            tbm.addRow(new String[1]);
-            jTable.setValueAt(tab.getCodigo(), i, 0);
-            jTable.setValueAt(tab.getNome(), i, 1);
-            jTable.setValueAt(tab.getRG(), i, 2);
-            jTable.setValueAt(tab.getCPF(), i, 3);
-            jTable.setValueAt(tab.getTelefone(), i, 4);
-            jTable.setValueAt(tab.getEmail(), i, 5);
-            i++;
-        }
-        Conexao.FecharConexao(Con);
-    }
-
-    private void BuscarCod() {
-        Connection Con = Conexao.AbrirConexao();
-        ClienteDAO bd = new ClienteDAO(Con);
-        List<Cliente> lista = new ArrayList<>();
-        lista = bd.Pesquisar_Cod_Cliente(codigo.getText());
-        DefaultTableModel tbm =
-                (DefaultTableModel) jTable.getModel();
-        while (tbm.getRowCount() >0) {
-            tbm.removeRow(0);
-            
-        }
-        int i = 0;
-        for (Cliente tab : lista){
-            tbm.addRow(new String[1]);
-            jTable.setValueAt(tab.getCodigo(), i, 0);
-            jTable.setValueAt(tab.getNome(), i, 1);
-            jTable.setValueAt(tab.getRG(), i, 2);
-            jTable.setValueAt(tab.getCPF(), i, 3);
-            jTable.setValueAt(tab.getTelefone(), i, 4);
-            jTable.setValueAt(tab.getEmail(), i, 5);
-            i++;
-        }
-        Conexao.FecharConexao(Con);
-    }
+    
 
 }

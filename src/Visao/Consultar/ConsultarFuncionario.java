@@ -56,34 +56,7 @@ public class ConsultarFuncionario extends javax.swing.JFrame {
         
         Conexao.FecharConexao(con);
     }
-    private void PesquisaNome() {
-        
-        String nome = jTF_Nome.getText();
-        
-        Connection con = Conexao.AbrirConexao();
-        FuncionarioDAO bd = new FuncionarioDAO(con);
-        List<Funcionario> lista = new ArrayList<>();
-        lista = bd.Pesquisar_Nome_Funcionario(nome);
-        DefaultTableModel tbm = 
-                (DefaultTableModel) tableFun.getModel();
-        
-        while (tbm.getRowCount() > 0) {            
-            tbm.removeRow(0);
-        }
-        
-        int i = 0;
-        
-        for (Funcionario tab : lista) {
-            tbm.addRow(new String[i]);
-            tableFun.setValueAt(tab.getCod(), i, 0);
-            tableFun.setValueAt(tab.getNome(), i, 1);
-            tableFun.setValueAt(tab.getLogin(), i, 2);
-            tableFun.setValueAt(tab.getSenha(), i, 3);
-            i++;
-        }
-        
-        Conexao.FecharConexao(con);
-    }
+   
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -226,12 +199,12 @@ public class ConsultarFuncionario extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        BuscarNome();
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        BuscarCod();
+       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -311,27 +284,6 @@ public class ConsultarFuncionario extends javax.swing.JFrame {
         Conexao.FecharConexao(Con);
     }
 
-    private void BuscarCod() {
-        Connection Con = Conexao.AbrirConexao();
-        FuncionarioDAO bd = new FuncionarioDAO(Con);
-        List<Funcionario> lista = new ArrayList<>();
-        lista = bd.Pesquisar_Cod_Funcionario(jTF_Cod.getText());
-        DefaultTableModel tbm =
-                (DefaultTableModel) tableFun.getModel();
-        while (tbm.getRowCount() >0) {
-            tbm.removeRow(0);
-            
-        }
-        int i = 0;
-        for (Funcionario tab : lista){
-            tbm.addRow(new String[1]);
-            tableFun.setValueAt(tab.getCod(), i, 0);
-            tableFun.setValueAt(tab.getNome(), i, 1);
-            tableFun.setValueAt(tab.getLogin(), i, 2);
-            tableFun.setValueAt(tab.getSenha(), i, 3);
-            i++;
-        }
-        Conexao.FecharConexao(Con);
-    }
+   
 
 }
